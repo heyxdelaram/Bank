@@ -1,55 +1,73 @@
+package Entity;
+
 public class AccountE{
     private long id;
-    private long number;
-    private String type;
-    private double deposit;
+    private String accountNumber;
     private long customerId;
-    public AccountE(long id,long number,String type,double deposit,long customerId){
-        this.id=id;
-        this.number=number;
-        this.type=type;
-        this.deposit=deposit;
-        this.customerId=customerId;
+    private String accountType;
+    private double balance;
+    private int loanStatus;
+    public AccountE(long id, String accountNumber, long customerId, String accountType, double balance, int loanStatus){
+        this.id = id;
+        this.accountNumber = accountNumber;
+        this.customerId = customerId;
+        this.accountType = accountType;
+        this.balance = balance;
+        this.loanStatus = loanStatus;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public AccountE setId(long id) {
         this.id = id;
+        return this;
     }
 
-    public long getNumber() {
-        return number;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setNumber(long number) {
-        this.number = number;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public double getDeposit() {
-        return deposit;
-    }
-
-    public void setDeposit(double deposit) {
-        this.deposit = deposit;
+    public AccountE setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+        return this;
     }
 
     public long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    public AccountE setCustomerId(long customerId) {
         this.customerId = customerId;
+        return this;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public AccountE setAccountType(String accountType) {
+        this.accountType = accountType;
+        return this;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public AccountE setBalance(double balance) {
+        this.balance = balance;
+        return this;
+    }
+
+    public int getLoanStatus() {
+        return loanStatus;
+    }
+
+    public AccountE setLoanStatus(int loanStatus) {
+        this.loanStatus = loanStatus;
+        return this;
     }
 
     public AccountE(){}

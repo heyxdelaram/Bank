@@ -1,116 +1,109 @@
+package Entity;
+
+import java.util.Date;
+
 public class CustomerE {
-    private long id;
-    private String name;
-    private long nID;
-    private String father;
-    private long cellNumber;
-    private String address;
-    private long homeNumber;
-    private String email;
-    private String dateOfBirth;
-    private String username;
-    private String password;
+    private long id = 3;
+    private String firstName = "della";
+    private String lastName = "janfarsa";
+    private String fatherName = "majid";
+    private String nationalCode = "044-107-3441";
+    private String cellPhone = "+989190981806";
+    private String address = "62 VILLAGE CITY";
+    private String city = "Tehran";
+    private String dateOfBirth = "2002-09-30";
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void CustomerE(long id, long nID, String name, String father, long cellNumber, String address, long homeNumber, String email, String dateOfBirth, String username, String password) {
+    public void CustomerE(long id, String firstName, String lastName, String fatherName, String nationalCode, String cellPhone, String address, String city, String dateOfBirth) {
         this.id = id;
-        this.name = name;
-        this.nID = nID;
-        this.father = father;
-        this.cellNumber = cellNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fatherName = fatherName;
+        this.nationalCode = nationalCode;
+        this.cellPhone = cellPhone;
         this.address = address;
-        this.homeNumber = homeNumber;
-        this.email = email;
-        this.dateOfBirth = dateOfBirth;
-        this.username=username;
-        this.password=password;
+        this.city = city;
+        this.dateOfBirth = this.dateOfBirth;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public CustomerE setId(long id) {
         this.id = id;
+        return this;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public CustomerE setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
     }
 
-    public long getnID() {
-        return nID;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setnID(long nID) {
-        this.nID = nID;
+    public CustomerE setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
     }
 
-    public String getFather() {
-        return father;
+    public String getFatherName() {
+        return fatherName;
     }
 
-    public void setFather(String father) {
-        this.father = father;
+    public CustomerE setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+        return this;
     }
 
-    public long getCellNumber() {
-        return cellNumber;
+    public String getNationalCode() {
+        return nationalCode;
     }
 
-    public void setCellNumber(long cellNumber) {
-        this.cellNumber = cellNumber;
+    public CustomerE setNationalCode(String nationalCode) {
+        this.nationalCode = nationalCode;
+        return this;
+    }
+
+    public String getCellPhone() {
+        return cellPhone;
+    }
+
+    public CustomerE setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public CustomerE setAddress(String address) {
         this.address = address;
+        return this;
     }
 
-    public long getHomeNumber() {
-        return homeNumber;
+    public String getCity() {
+        return city;
     }
 
-    public void setHomeNumber(long homeNumber) {
-        this.homeNumber = homeNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public CustomerE setCity(String city) {
+        this.city = city;
+        return this;
     }
 
     public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public CustomerE setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+        return this;
     }
 
     public CustomerE(){}

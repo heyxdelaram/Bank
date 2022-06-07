@@ -1,19 +1,23 @@
+package Entity;
+
 public class TransactionE {
     private long id;
-    private long cardId;
-    private long destinationCardNumber;
+    private long fromId;
+    private long toId;
     private double amount;
-    private String date;
-    private String time;
     private long loanId;
-    public TransactionE(long id,long cardId,long destinationCardNumber,double amount,String date,String time,long loanId){
-        this.id=id;
-        this.cardId=cardId;
-        this.destinationCardNumber=destinationCardNumber;
-        this.amount=amount;
-        this.date=date;
-        this.time=time;
-        this.loanId=loanId;
+    private long checkId;
+    private String time;
+    private String date;
+    public TransactionE(long id, long fromId, long toId, double amount, long loanId, long checkId, String time, String date){
+        this.id = id;
+        this.fromId = fromId;
+        this.toId = toId;
+        this.amount = amount;
+        this.loanId = loanId;
+        this.checkId = checkId;
+        this.time = time;
+        this.date = date;
     }
     public TransactionE(){}
 
@@ -21,55 +25,71 @@ public class TransactionE {
         return id;
     }
 
-    public void setId(long id) {
+    public TransactionE setId(long id) {
         this.id = id;
+        return this;
     }
 
-    public long getCardId() {
-        return cardId;
+    public long getFromId() {
+        return fromId;
     }
 
-    public void setCardId(long cardId) {
-        this.cardId = cardId;
+    public TransactionE setFromId(long fromId) {
+        this.fromId = fromId;
+        return this;
     }
 
-    public long getDestinationCardNumber() {
-        return destinationCardNumber;
+    public long getToId() {
+        return toId;
     }
 
-    public void setDestinationCardNumber(long destinationCardNumber) {
-        this.destinationCardNumber = destinationCardNumber;
+    public TransactionE setToId(long toId) {
+        this.toId = toId;
+        return this;
     }
 
     public double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public TransactionE setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+        return this;
     }
 
     public long getLoanId() {
         return loanId;
     }
 
-    public void setLoanId(long loanId) {
+    public TransactionE setLoanId(long loanId) {
         this.loanId = loanId;
+        return this;
+    }
+
+    public long getCheckId() {
+        return checkId;
+    }
+
+    public TransactionE setCheckId(long checkId) {
+        this.checkId = checkId;
+        return this;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public TransactionE setTime(String time) {
+        this.time = time;
+        return this;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public TransactionE setDate(String date) {
+        this.date = date;
+        return this;
     }
 }
