@@ -3,17 +3,18 @@ package Entity;
 import java.util.Date;
 
 public class CustomerE {
-    private long id = 3;
-    private String firstName ;
-    private String lastName ;
+    private long id;
+    private String firstName;
+    private String lastName;
     private String fatherName;
     private String nationalCode;
+    private String password;
     private String cellPhone;
     private String address;
     private String city;
-    private String dateOfBirth;
+    private Date dateOfBirth;
 
-    public void CustomerE(long id, String firstName, String lastName, String fatherName, String nationalCode, String cellPhone, String address, String city, String dateOfBirth) {
+    public void CustomerE(long id, String firstName, String lastName, String fatherName, String nationalCode, String cellPhone, String address, String city, Date dateOfBirth) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,7 +23,7 @@ public class CustomerE {
         this.cellPhone = cellPhone;
         this.address = address;
         this.city = city;
-        this.dateOfBirth =dateOfBirth;
+        this.dateOfBirth = this.dateOfBirth;
     }
 
     public long getId() {
@@ -70,6 +71,15 @@ public class CustomerE {
         return this;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public CustomerE setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
     public String getCellPhone() {
         return cellPhone;
     }
@@ -97,11 +107,11 @@ public class CustomerE {
         return this;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public java.sql.Date getDateOfBirth() {
+        return (java.sql.Date) dateOfBirth;
     }
 
-    public CustomerE setDateOfBirth(String dateOfBirth) {
+    public CustomerE setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
         return this;
     }

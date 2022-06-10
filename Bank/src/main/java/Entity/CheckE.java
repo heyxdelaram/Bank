@@ -4,18 +4,18 @@ public class CheckE {
     private long id;
     private long payeeId;
     private Double amountInNumbers;
-   // private String amountInWords;
-    private long to;
+    //private String amountInWords;
+    private long forId;
     //private long accountNumber;
     private String currentDate;
 
 
-    public CheckE(long id,long payeeId, Double amountInNumbers, long to){
+    public CheckE(long id,long payeeId, Double amountInNumbers, long forId, String currentDate){
         this.id = id;
         this.payeeId = payeeId;
-        //this.amountInNumbers = amountInNumbers;
         this.amountInNumbers = amountInNumbers;
-        this.to=to;
+        //this.amountInNumbers = amountInNumbers;
+        this.forId = forId;
         //this.accountNumber = accountNumber;
         this.currentDate = currentDate;
     }
@@ -47,14 +47,6 @@ public class CheckE {
         return this;
     }
 
-  /*  public String getAmountInWords() {
-        return amountInWords;
-    }
-
-    public CheckE setAmountInWords(String amountInWords) {
-        this.amountInWords = amountInWords;
-        return this;
-    }
 
     public long getForId() {
         return forId;
@@ -65,14 +57,6 @@ public class CheckE {
         return this;
     }
 
-    public long getAccountNumber() {
-        return accountNumber;
-    }
-
-    public CheckE setAccountNumber(long accountNumber) {
-        this.accountNumber = accountNumber;
-        return this;
-    }
 
     public String getCurrentDate() {
         return currentDate;
@@ -82,7 +66,7 @@ public class CheckE {
         this.currentDate = currentDate;
         return this;
     }
-*/
+
     public CheckE(){
     }
 }
