@@ -17,7 +17,7 @@ public class CheckE {
         this.amountInNumbers = amountInNumbers;
         this.to=to;
         //this.accountNumber = accountNumber;
-        //this.currentDate = currentDate;
+        this.currentDate = currentDate;
     }
 
     public long getId() {
