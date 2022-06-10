@@ -7,7 +7,7 @@ public class CheckE {
    // private String amountInWords;
     private long to;
     //private long accountNumber;
-    //private String currentDate;
+    private String currentDate;
 
 
     public CheckE(long id,long payeeId, Double amountInNumbers, long to){
