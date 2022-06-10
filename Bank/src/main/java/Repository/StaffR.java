@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaffR implements AutoCloseable{
+public class StaffR {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -65,13 +65,39 @@ public class StaffR implements AutoCloseable{
         preparedStatement.executeUpdate();
     }
 
+    public void login(StaffE staffE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT *FROM staff WHERE username = ?");
+        preparedStatement.setString(1, staffE.getUsername());
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        String dbusername = null;
+        String dbpass = null;
+
+        while (resultSet.next()) {
+            dbusername = resultSet.getString("username");
+            dbpass = resultSet.getString("password");
+        }
+
+        //System.out.println(dbnCode);
+        //System.out.println(dbpass);
+        if (dbusername.equals(staffE.getUsername())){
+            if (staffE.getPassword().equals(dbpass)){
+                System.out.println("Log in successful.");
+            }else{
+                System.out.println("Log in unsuccessful.");
+            }
+        }else{
+            System.out.println("Log in unsuccessful.");
+        }
+    }
+
     public List<StaffE> select() throws Exception{
         preparedStatement = connection.prepareStatement("SELECT *FROM staff;");
         ResultSet resultSet = preparedStatement.executeQuery();
         List<StaffE> staffEList = new ArrayList<>();
         while (resultSet.next()){
             StaffE staffE = new StaffE();
-            staffE.setId(resultSet.getLong("customer_id"));
+            staffE.setId(resultSet.getLong("staff_id"));
             staffE.setFirstName(resultSet.getString("first_name"));
             staffE.setLastName(resultSet.getString("last_name"));
             staffE.setFatherName(resultSet.getString("father_name"));
