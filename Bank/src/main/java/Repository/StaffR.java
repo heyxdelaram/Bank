@@ -65,30 +65,35 @@ public class StaffR {
         preparedStatement.executeUpdate();
     }
 
-    public void login(StaffE staffE) throws Exception {
+/*
+    public String selectUsername(StaffE staffE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT *FROM staff WHERE username = ?");
+        String dbusername = null;
+        try {
+            preparedStatement.setString(1, staffE.getUsername());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                dbusername = resultSet.getString("username");
+            }
+        }catch (Exception exception){
+            throw new BankException("System Error");
+        }
+
+        return dbusername;
+    }
+*/
+    public String selectPassword(StaffE staffE) throws Exception, BankException {
         preparedStatement = connection.prepareStatement("SELECT *FROM staff WHERE username = ?");
         preparedStatement.setString(1, staffE.getUsername());
-        ResultSet resultSet = preparedStatement.executeQuery();
 
-        String dbusername = null;
+        ResultSet resultSet = preparedStatement.executeQuery();
         String dbpass = null;
 
         while (resultSet.next()) {
-            dbusername = resultSet.getString("username");
-            dbpass = resultSet.getString("password");
+            dbpass = resultSet.getString("username");
         }
-
-        //System.out.println(dbnCode);
-        //System.out.println(dbpass);
-        if (dbusername.equals(staffE.getUsername())){
-            if (staffE.getPassword().equals(dbpass)){
-                System.out.println("Log in successful.");
-            }else{
-                System.out.println("Log in unsuccessful.");
-            }
-        }else{
-            System.out.println("Log in unsuccessful.");
-        }
+        return dbpass;
     }
 
     public List<StaffE> select() throws Exception{

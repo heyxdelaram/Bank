@@ -39,7 +39,7 @@ public class CustomersR {
         preparedStatement.setString(7, customersE.getCellPhone());
         preparedStatement.setString(8, customersE.getAddress());
         preparedStatement.setString(9, customersE.getCity());
-        preparedStatement.setDate(10, customersE.getDateOfBirth());
+        preparedStatement.setString(10, customersE.getDateOfBirth());
         preparedStatement.executeUpdate();
     }
 
@@ -54,7 +54,7 @@ public class CustomersR {
         preparedStatement.setString(6, customersE.getCellPhone());
         preparedStatement.setString(7, customersE.getAddress());
         preparedStatement.setString(8, customersE.getCity());
-        preparedStatement.setDate(9, customersE.getDateOfBirth());
+        preparedStatement.setString(9, customersE.getDateOfBirth());
         preparedStatement.setLong(10, customersE.getId());
         preparedStatement.executeUpdate();
     }
@@ -66,6 +66,23 @@ public class CustomersR {
         preparedStatement.executeUpdate();
     }
 */
+    public String selectPassword(CustomerE customerE) throws BankException, Exception {
+        preparedStatement = connection.prepareStatement("SELECT *FROM customers WHERE national_code = ?");
+        try {
+            preparedStatement.setString(1, customerE.getNationalCode());
+        }catch (Exception exception){
+            throw new BankException("System Error");
+        }
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        String dbpass = null;
+        while (resultSet.next()) {
+            dbpass = resultSet.getString("password");
+        }
+        //customerE.setPassword(dbpass);
+        return dbpass;
+    }
+
     public void login(CustomerE customerE) throws Exception {
         preparedStatement = connection.prepareStatement("SELECT *FROM customers WHERE national_code = ?");
         preparedStatement.setString(1, customerE.getNationalCode());
@@ -73,12 +90,12 @@ public class CustomersR {
 
         String dbnCode = null;
         String dbpass = null;
-
         while (resultSet.next()) {
             dbnCode = resultSet.getString("national_code");
             dbpass = resultSet.getString("password");
         }
-
+    }
+    /*
         //System.out.println(dbnCode);
         //System.out.println(dbpass);
         if (dbnCode.equals(customerE.getNationalCode())){
@@ -133,6 +150,7 @@ public class CustomersR {
         //return customerE;
     }
 */
+
     public List<CustomerE> select() throws Exception{
         preparedStatement = connection.prepareStatement("SELECT *FROM customers;");
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -148,7 +166,7 @@ public class CustomersR {
             customerE.setCellPhone(resultSet.getString("cell_phone"));
             customerE.setAddress(resultSet.getString("address"));
             customerE.setCity(resultSet.getString("city"));
-            customerE.setDateOfBirth(resultSet.getDate("birth_date"));
+            customerE.setDateOfBirth(resultSet.getString("birth_date"));
         }
         return customerEList;
     }

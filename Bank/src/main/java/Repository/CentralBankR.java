@@ -1,8 +1,6 @@
 package Repository;
 
-import Entity.CentralBankE;
-import Entity.CheckE;
-import Entity.TransactionE;
+import Entity.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,33 +42,37 @@ public class CentralBankR {
                 transactionR.select();
         }
     }
-
-    public void login(CentralBankE centralBankE) throws Exception {
+/*
+    public String selectUsername(CentralBankE centralBankE) throws Exception {
+        String dbusername = null;
         preparedStatement = connection.prepareStatement("SELECT *FROM `central bank` WHERE username = ?");
-        preparedStatement.setString(1, centralBankE.getUsername());
+        try {
+            preparedStatement.setString(1, centralBankE.getUsername());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                dbusername = resultSet.getString("username");
+            }
+        }catch (Exception exception){
+            throw new BankException("System Error");
+        }
+
+        return dbusername;
+    }
+*/
+    public String selectPassword(CustomerE customerE) throws BankException, Exception {
+        preparedStatement = connection.prepareStatement("SELECT *FROM `central bank` WHERE username = ?");
+        preparedStatement.setString(1, customerE.getNationalCode());
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        String dbusername = null;
         String dbpass = null;
-
         while (resultSet.next()) {
-            dbusername = resultSet.getString("username");
             dbpass = resultSet.getString("password");
         }
-
-        //System.out.println(dbnCode);
-        //System.out.println(dbpass);
-        if (dbusername.equals(centralBankE.getUsername())){
-            if (centralBankE.getPassword().equals(dbpass)){
-                System.out.println("Log in successful.");
-            }else{
-                System.out.println("Log in unsuccessful.");
-            }
-        }else{
-            System.out.println("Log in unsuccessful.");
-        }
-
+        //customerE.setPassword(dbpass);
+        return dbpass;
     }
+
     public void commit() throws Exception{
         connection.commit();;
     }
