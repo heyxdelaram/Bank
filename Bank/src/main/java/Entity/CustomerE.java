@@ -12,7 +12,7 @@ public class CustomerE {
     private String cellPhone;
     private String address;
     private String city;
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     public void CustomerE(long id, String firstName, String lastName, String fatherName, String nationalCode, String cellPhone, String address, String city, Date dateOfBirth) {
         this.id = id;
@@ -107,11 +107,11 @@ public class CustomerE {
         return this;
     }
 
-    public java.sql.Date getDateOfBirth() {
-        return (java.sql.Date) dateOfBirth;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public CustomerE setDateOfBirth(Date dateOfBirth) {
+    public CustomerE setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
         return this;
     }
