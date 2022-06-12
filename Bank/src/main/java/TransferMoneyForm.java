@@ -26,6 +26,7 @@ public class TransferMoneyForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Transfer Money");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(6, 2, 2, 2));
 
         payeeNumLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
