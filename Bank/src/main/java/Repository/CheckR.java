@@ -60,6 +60,21 @@ public class CheckR implements AutoCloseable {
         }
         return checkEList;
     }
+    
+    public int selectRowNum() throws Exception {
+        int count = 0;
+        try {
+            preparedStatement = connection.prepareStatement("SELECT count(*) FROM checks");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+
+        return count;
+    }
 
     public void commit() throws Exception{
         connection.commit();;
