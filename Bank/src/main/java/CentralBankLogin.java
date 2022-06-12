@@ -19,6 +19,7 @@ public class CentralBankLogin extends javax.swing.JDialog{
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Log In");
 
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(3, 2, 10, 5));
 
         usernameLabel.setText("Username:");
