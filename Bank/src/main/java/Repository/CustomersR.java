@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomersR {
+public class CustomersR implements AutoCloseable{
     private Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -66,12 +66,12 @@ public class CustomersR {
         preparedStatement.executeUpdate();
     }
 */
-    public String selectPassword(CustomerE customerE) throws BankException, Exception {
+    public String selectPassword(CustomerE customerE) throws Exception {
         preparedStatement = connection.prepareStatement("SELECT *FROM customers WHERE national_code = ?");
         try {
             preparedStatement.setString(1, customerE.getNationalCode());
         }catch (Exception exception){
-            throw new BankException("System Error");
+            throw new Exception("System Error");
         }
         ResultSet resultSet = preparedStatement.executeQuery();
 

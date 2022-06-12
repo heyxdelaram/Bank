@@ -60,7 +60,7 @@ public class CentralBankR {
         return dbusername;
     }
 */
-    public String selectPassword(CustomerE customerE) throws BankException, Exception {
+    public String selectPassword(CustomerE customerE) throws Exception {
         preparedStatement = connection.prepareStatement("SELECT *FROM `central bank` WHERE username = ?");
         preparedStatement.setString(1, customerE.getNationalCode());
         ResultSet resultSet = preparedStatement.executeQuery();

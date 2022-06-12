@@ -6,10 +6,15 @@ import Repository.CustomersR;
 import java.util.List;
 
 public class CustomerS {
-    private CustomerS(){}
+    public CustomerS(){}
     private static CustomerS customerS=new CustomerS();
     public static CustomerS getInstance(){
         return customerS;
+    }
+    public void login(CustomerE customerE) throws Exception{
+        try (CustomersR customersR=new CustomersR()){
+            customersR.selectPassword(customerE);
+        }
     }
     public void save(CustomerE customerE) throws Exception{
         try (CustomersR customersR=new CustomersR()){
@@ -23,3 +28,4 @@ public class CustomerS {
             customerES=customersR.select (); }
         return customerES; }
 }
+

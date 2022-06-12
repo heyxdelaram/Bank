@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaffR {
+public class StaffR implements AutoCloseable{
     private Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -83,7 +83,7 @@ public class StaffR {
         return dbusername;
     }
 */
-    public String selectPassword(StaffE staffE) throws Exception, BankException {
+    public String selectPassword(StaffE staffE) throws Exception {
         preparedStatement = connection.prepareStatement("SELECT *FROM staff WHERE username = ?");
         preparedStatement.setString(1, staffE.getUsername());
 

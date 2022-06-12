@@ -28,7 +28,7 @@ public class AccountR implements AutoCloseable {
         preparedStatement.setLong(3, accountE.getCustomerId());
         preparedStatement.setString(4, accountE.getAccountType());
         preparedStatement.setDouble(5, accountE.getBalance());
-        preparedStatement.setInt(6, accountE.getLoanStatus());
+        //preparedStatement.setInt(6, accountE.getLoanStatus());
         preparedStatement.executeUpdate();
     }
 
@@ -39,7 +39,7 @@ public class AccountR implements AutoCloseable {
         preparedStatement.setLong(2, accountE.getCustomerId());
         preparedStatement.setString(3, accountE.getAccountType());
         preparedStatement.setDouble(4, accountE.getBalance());
-        preparedStatement.setInt(5, accountE.getLoanStatus());
+        //preparedStatement.setInt(5, accountE.getLoanStatus());
         preparedStatement.setLong(6, accountE.getId());
 
         preparedStatement.executeUpdate();
@@ -62,7 +62,7 @@ public class AccountR implements AutoCloseable {
             accountE.setCustomerId(resultSet.getLong("customer_id"));
             accountE.setAccountType(resultSet.getString("account_type"));
             accountE.setBalance(resultSet.getDouble("balance"));
-            accountE.setLoanStatus(resultSet.getInt("loan_status"));
+            //accountE.setLoanStatus(resultSet.getInt("loan_status"));
         }
         return accountEList;
     }
