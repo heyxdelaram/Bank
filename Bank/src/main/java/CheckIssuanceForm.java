@@ -22,6 +22,7 @@ public class CheckIssuanceForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Check Issuance Form");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(5, 2, 2, 2));
 
         firstNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
