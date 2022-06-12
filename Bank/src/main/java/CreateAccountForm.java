@@ -36,6 +36,7 @@ public class CreateAccountForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Account");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(11, 2, 2, 2));
 
         firstNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
