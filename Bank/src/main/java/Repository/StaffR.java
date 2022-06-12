@@ -118,6 +118,22 @@ public class StaffR implements AutoCloseable{
         }
         return staffEList;
     }
+    
+    public int selectRowNum() throws Exception {
+        int count = 0;
+        try {
+            preparedStatement = connection.prepareStatement("SELECT count(*) FROM staff");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                //count++;
+                count = resultSet.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+
+        return count;
+    }
 
     public void commit() throws Exception{
         connection.commit();;
