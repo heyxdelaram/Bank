@@ -82,7 +82,7 @@ public class CustomersR implements AutoCloseable{
         //customerE.setPassword(dbpass);
         return dbpass;
     }
-
+   /*
     public void login(CustomerE customerE) throws Exception {
         preparedStatement = connection.prepareStatement("SELECT *FROM customers WHERE national_code = ?");
         preparedStatement.setString(1, customerE.getNationalCode());
@@ -95,6 +95,7 @@ public class CustomersR implements AutoCloseable{
             dbpass = resultSet.getString("password");
         }
     }
+    */
     /*
         //System.out.println(dbnCode);
         //System.out.println(dbpass);
