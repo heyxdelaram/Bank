@@ -1,12 +1,13 @@
 package GUI;
 
-public class CentralBankLogin extends javax.swing.JDialog{
+public class CentralBankLogin extends javax.swing.JDialog {
+
     public CentralBankLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
-
     }
+
     private void initComponents() {
 
         usernameLabel = new javax.swing.JLabel();
@@ -18,14 +19,15 @@ public class CentralBankLogin extends javax.swing.JDialog{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Log In");
-
         setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(3, 2, 10, 5));
 
+        usernameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         usernameLabel.setText("Username:");
         getContentPane().add(usernameLabel);
         getContentPane().add(usernameText);
 
+        passLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         passLabel.setText("Password:");
         getContentPane().add(passLabel);
         getContentPane().add(passText);
@@ -39,6 +41,11 @@ public class CentralBankLogin extends javax.swing.JDialog{
         getContentPane().add(loginButton);
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(cancelButton);
 
         pack();
@@ -47,10 +54,10 @@ public class CentralBankLogin extends javax.swing.JDialog{
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
-    
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
-    }   
+    }
 
     public static void main(String args[]) {
         try {
@@ -69,8 +76,6 @@ public class CentralBankLogin extends javax.swing.JDialog{
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CentralBankLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 CentralBankLogin dialog = new CentralBankLogin(new javax.swing.JFrame(), true);
