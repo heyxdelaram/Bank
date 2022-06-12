@@ -7,8 +7,7 @@ public class CheckE {
     //private String amountInWords;
     private long forId;
     //private long accountNumber;
-    private String currentDate;
-
+    private String date;
 
     public CheckE(long id,long payeeId, Double amountInNumbers, long forId, String currentDate){
         this.id = id;
@@ -17,7 +16,7 @@ public class CheckE {
         //this.amountInNumbers = amountInNumbers;
         this.forId = forId;
         //this.accountNumber = accountNumber;
-        this.currentDate = currentDate;
+        this.date = currentDate;
     }
 
     public long getId() {
@@ -58,14 +57,15 @@ public class CheckE {
     }
 
 
-    public String getCurrentDate() {
-        return currentDate;
+    public String getDate() {
+        return date;
     }
 
-    public CheckE setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
+    public CheckE setDate(String currentDate) {
+        this.date = currentDate;
         return this;
     }
+
 
     public CheckE(){
     }
