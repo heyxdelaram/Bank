@@ -23,27 +23,33 @@ public class LoanForm extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Loan Form");
+        setTitle("Loan Form");        
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(6, 2, 2, 2));
 
+        firstNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         firstNameLabel.setText("First Name :");
         getContentPane().add(firstNameLabel);
         getContentPane().add(firstNameText);
 
+        lastNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lastNameLabel.setText("Last Name : ");
         getContentPane().add(lastNameLabel);
         getContentPane().add(lastNameText);
 
+        AccountNumLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AccountNumLabel.setText("Account Number :");
         getContentPane().add(AccountNumLabel);
         getContentPane().add(AccountNumText);
 
+        typeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         typeLabel.setText("Loan Type : ");
         getContentPane().add(typeLabel);
 
         typeText.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Home and Mortgage", "Auto", "Student" }));
         getContentPane().add(typeText);
 
+        amountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         amountLabel.setText("Loan Amount");
         getContentPane().add(amountLabel);
         getContentPane().add(amountText);
