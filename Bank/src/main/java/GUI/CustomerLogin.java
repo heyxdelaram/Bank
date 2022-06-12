@@ -1,5 +1,6 @@
 package GUI;
 
+import Controller.CustomerC;
 import Entity.CustomerE;
 
 import javax.swing.*;
@@ -35,15 +36,24 @@ public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable 
         getContentPane().add(nCodeLabel);
         getContentPane().add(nCodeText);
 
+        CustomerLogin customerLogin=new CustomerLogin();
+        customerLogin.setnCodeText(nCodeText);
+
         passLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         passLabel.setText("Password :");
         getContentPane().add(passLabel);
         getContentPane().add(passText);
 
+        customerLogin.setPassText(passText);
+
         loginButton.setText("Log in ");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
+                try {
+                    loginButtonActionPerformed(evt);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         getContentPane().add(loginButton);
@@ -59,7 +69,9 @@ public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable 
         pack();
     }
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    public void loginButtonActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
+        CustomerC c=new CustomerC();
+        c.login();
         this.dispose();
         MainMenu mm = new MainMenu();
         CustomerMenu customerMenu = new CustomerMenu(mm, true);

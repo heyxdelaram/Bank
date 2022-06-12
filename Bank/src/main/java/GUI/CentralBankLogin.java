@@ -1,12 +1,19 @@
 package GUI;
 
-public class CentralBankLogin extends javax.swing.JDialog{
+import javax.swing.*;
+
+public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseable{
     public CentralBankLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
 
     }
+
+    public CentralBankLogin() {
+
+    }
+
     private void initComponents() {
 
         usernameLabel = new javax.swing.JLabel();
@@ -86,4 +93,25 @@ public class CentralBankLogin extends javax.swing.JDialog{
     private javax.swing.JTextField passText;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameText;
+
+    public JTextField getPassText() {
+        return passText;
+    }
+
+    public void setPassText(JTextField passText) {
+        this.passText = passText;
+    }
+
+    public JTextField getUsernameText() {
+        return usernameText;
+    }
+
+    public void setUsernameText(JTextField usernameText) {
+        this.usernameText = usernameText;
+    }
+
+    @Override
+    public void close() throws Exception {
+
+    }
 }
