@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckR implements AutoCloseable {
+public class CheckR {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -19,23 +19,23 @@ public class CheckR implements AutoCloseable {
     }
 
     public void insert(CheckE checkE) throws Exception{
-        preparedStatement = connection.prepareStatement("INSERT INTO checks (check_id, payee_id, amount_in_numbers, for_id, current_date) VALUES (?,?,?,?,?)");
+        preparedStatement = connection.prepareStatement("INSERT INTO checks (check_id, payee_id, amount_in_numbers, for_id, date) VALUES (?,?,?,?,?)");
 
         preparedStatement.setLong(1, checkE.getId());
         preparedStatement.setLong(2, checkE.getPayeeId());
         preparedStatement.setDouble(3, checkE.getAmountInNumbers());
         preparedStatement.setLong(4, checkE.getForId());
-        preparedStatement.setString(5, checkE.getCurrentDate());
+        preparedStatement.setString(5, checkE.getDate());
         preparedStatement.executeUpdate();
     }
 
     public void update(CheckE checkE) throws Exception{
-        preparedStatement = connection.prepareStatement("UPDATE checks SET check_id = ?, payee_id = ?, amount_in_numbers = ?, for_id = ?, current_date = ?");
+        preparedStatement = connection.prepareStatement("UPDATE checks SET check_id = ?, payee_id = ?, amount_in_numbers = ?, for_id = ?, date = ?");
 
         preparedStatement.setLong(1, checkE.getPayeeId());
         preparedStatement.setDouble(2, checkE.getAmountInNumbers());
         preparedStatement.setLong(3, checkE.getForId());
-        preparedStatement.setString(4, checkE.getCurrentDate());
+        preparedStatement.setString(4, checkE.getDate());
         preparedStatement.setLong(5, checkE.getId());
         preparedStatement.executeUpdate();
     }
@@ -56,17 +56,18 @@ public class CheckR implements AutoCloseable {
             checkE.setForId(resultSet.getLong("payee_id"));
             checkE.setAmountInNumbers(resultSet.getDouble("amount_in_numbers"));
             checkE.setForId(resultSet.getLong("for_id"));
-            checkE.setCurrentDate(resultSet.getString("current_id"));
+            checkE.setDate(resultSet.getString("date"));
         }
         return checkEList;
     }
-    
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {
             preparedStatement = connection.prepareStatement("SELECT count(*) FROM checks");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                //count++;
                 count = resultSet.getInt(1);
             }
         } catch (Exception e) {
@@ -88,4 +89,3 @@ public class CheckR implements AutoCloseable {
         connection.close();
     }
 }
-
