@@ -24,6 +24,7 @@ public class PayDebtForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pay Debt");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(5, 2, 2, 2));
 
         payeeNumLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
