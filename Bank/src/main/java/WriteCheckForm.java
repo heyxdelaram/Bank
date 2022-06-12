@@ -25,6 +25,7 @@ public class WriteCheckForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Write Check Form");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(5, 5, 2, 2));
 
         amountNumberLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
