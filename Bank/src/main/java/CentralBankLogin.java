@@ -46,6 +46,10 @@ public class CentralBankLogin extends javax.swing.JDialog{
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
+    
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        this.dispose();
+    }   
 
     public static void main(String args[]) {
         try {
