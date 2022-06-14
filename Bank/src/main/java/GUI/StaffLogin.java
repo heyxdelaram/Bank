@@ -1,9 +1,14 @@
 
 package GUI;
 
+import Controller.CustomerC;
+import Controller.StaffC;
+
 import javax.swing.*;
 
 public class StaffLogin extends javax.swing.JDialog implements AutoCloseable{
+    static String username1;
+    static String pass1;
 
     public StaffLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -12,7 +17,7 @@ public class StaffLogin extends javax.swing.JDialog implements AutoCloseable{
     }
 
     public StaffLogin() {
-
+        initComponents();
     }
 
     private void initComponents() {
@@ -20,7 +25,7 @@ public class StaffLogin extends javax.swing.JDialog implements AutoCloseable{
         usernameLabel = new javax.swing.JLabel();
         usernameText = new javax.swing.JTextField();
         passLabel = new javax.swing.JLabel();
-        passText = new javax.swing.JTextField();
+        passText = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -60,9 +65,17 @@ public class StaffLogin extends javax.swing.JDialog implements AutoCloseable{
     }
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        MainMenu mm = new MainMenu();
-        StaffMenu stm = new StaffMenu(mm, true);
-        stm.setVisible(true);
+        String nCode = usernameText.getText();
+        String pass = passText.getText();
+
+        this.username1 = nCode;
+        this.pass1 = pass;
+        StaffC staffC = new StaffC();
+        try {
+            staffC.login();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,24 +100,16 @@ public class StaffLogin extends javax.swing.JDialog implements AutoCloseable{
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel passLabel;
-    private javax.swing.JTextField passText;
+    private javax.swing.JPasswordField passText;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameText;
 
-    public JTextField getPassText() {
-        return passText;
+    public String  getPass() {
+        return pass1;
     }
 
-    public void setPassText(JTextField passText) {
-        this.passText = passText;
-    }
-
-    public JTextField getUsernameText() {
-        return usernameText;
-    }
-
-    public void setUsernameText(JTextField usernameText) {
-        this.usernameText = usernameText;
+    public String getUsername() {
+        return username1;
     }
 
     @Override

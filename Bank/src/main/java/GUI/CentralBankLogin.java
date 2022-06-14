@@ -1,8 +1,15 @@
 package GUI;
 
-import javax.swing.*;
+import Controller.CentralBankC;
+import Controller.StaffC;
+
+import static GUI.StaffLogin.username1;
 
 public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseable{
+
+    private String username1;
+    private String pass1;
+
     public CentralBankLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -10,22 +17,21 @@ public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseab
 
     }
 
-    public CentralBankLogin() {
-
+    public CentralBankLogin(){
+        initComponents();
     }
-
     private void initComponents() {
 
         usernameLabel = new javax.swing.JLabel();
         usernameText = new javax.swing.JTextField();
         passLabel = new javax.swing.JLabel();
-        passText = new javax.swing.JTextField();
+        passText = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Log In");
-
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(3, 2, 10, 5));
 
         usernameLabel.setText("Username:");
@@ -51,7 +57,22 @@ public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseab
     }
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+
+        String nCode = usernameText.getText();
+        String pass = passText.getText();
+
+        this.username1 = nCode;
+        this.pass1 = pass;
+        CentralBankC centralBankC = new CentralBankC();
+        try {
+            centralBankC.login();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        this.dispose();
     }
 
     public static void main(String args[]) {
@@ -90,24 +111,17 @@ public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseab
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel passLabel;
-    private javax.swing.JTextField passText;
+    private javax.swing.JPasswordField passText;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameText;
 
-    public JTextField getPassText() {
-        return passText;
+    public String getPass() {
+        return pass1;
     }
 
-    public void setPassText(JTextField passText) {
-        this.passText = passText;
-    }
 
-    public JTextField getUsernameText() {
-        return usernameText;
-    }
-
-    public void setUsernameText(JTextField usernameText) {
-        this.usernameText = usernameText;
+    public String getUsername() {
+        return username1;
     }
 
     @Override

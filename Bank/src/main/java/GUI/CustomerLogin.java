@@ -4,8 +4,9 @@ import Controller.CustomerC;
 import Entity.CustomerE;
 
 import javax.swing.*;
-
 public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable {
+    public String nCode1;
+    public String pass1;
 
     public CustomerLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -14,15 +15,15 @@ public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable 
     }
 
     public CustomerLogin() {
-
+        initComponents();
     }
 
-    private void initComponents() {
+    public void initComponents() {
 
         nCodeLabel = new javax.swing.JLabel();
         nCodeText = new javax.swing.JTextField();
         passLabel = new javax.swing.JLabel();
-        passText = new javax.swing.JTextField();
+        passText = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -36,24 +37,15 @@ public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable 
         getContentPane().add(nCodeLabel);
         getContentPane().add(nCodeText);
 
-        CustomerLogin customerLogin=new CustomerLogin();
-        customerLogin.setnCodeText(nCodeText);
-
         passLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         passLabel.setText("Password :");
         getContentPane().add(passLabel);
         getContentPane().add(passText);
 
-        customerLogin.setPassText(passText);
-
         loginButton.setText("Log in ");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    loginButtonActionPerformed(evt);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                loginButtonActionPerformed(evt);
             }
         });
         getContentPane().add(loginButton);
@@ -69,14 +61,21 @@ public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable 
         pack();
     }
 
-    public void loginButtonActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
-        CustomerC c=new CustomerC();
-        c.login();
-        this.dispose();
-        MainMenu mm = new MainMenu();
-        CustomerMenu customerMenu = new CustomerMenu(mm, true);
-        customerMenu.setVisible(true);
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String nCode = nCodeText.getText();
+        String pass = passText.getText();
+
+        this.nCode1 = nCode;
+        this.pass1 = pass;
+        CustomerC customerC = new CustomerC();
+        try {
+            customerC.login();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
@@ -102,22 +101,14 @@ public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable 
     private javax.swing.JLabel nCodeLabel;
     private javax.swing.JTextField nCodeText;
     private javax.swing.JLabel passLabel;
-    private javax.swing.JTextField passText;
+    private javax.swing.JPasswordField passText;
 
-    public JTextField getnCodeText() {
-        return nCodeText;
+    public String getnCode() {
+        return nCode1;
     }
 
-    public void setnCodeText(JTextField nCodeText) {
-        this.nCodeText = nCodeText;
-    }
-
-    public JTextField getPassText() {
-        return passText;
-    }
-
-    public void setPassText(JTextField passText) {
-        this.passText = passText;
+    public String getPass() {
+        return pass1;
     }
 
     @Override
