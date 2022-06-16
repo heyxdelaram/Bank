@@ -30,4 +30,10 @@ public class AccountS {
         }
         return accountES;
     }
+    public void numbermethod() throws Exception {
+        try (AccountR accountR = new AccountR()) {
+            accountR.selectRowNum();
+        } catch (Exception e) {
+        }
+    }
 }
