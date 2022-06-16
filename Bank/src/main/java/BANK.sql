@@ -12,7 +12,7 @@ CREATE TABLE `customers` (
     `last_name` VARCHAR(50) NOT NULL,
     `father_name` VARCHAR(20),
     `national_code` VARCHAR(13) NOT NULL,
-    `password` VARCHAR(15) NOT NULL
+    `password` VARCHAR(15) NOT NULL,
     `cell_phone` VARCHAR(50) NOT NULL,
 	`address` VARCHAR(100) NOT NULL,  
     `city` varchar(50) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `customers` (
     PRIMARY KEY (`customer_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
-INSERT INTO `customers` VALUES(1, 'Tom', 'Rollen', 'Ben', '044-647-3290', 'CUSTOMER1234' '+989120983472', '5 Spohn Circle', 'Tehran', '1964-08-30'); 
+INSERT INTO `customers` VALUES(1, 'Tom', 'Rollen', 'Ben', '044-647-3290', 'CUSTOMER1234', '+989120983472', '5 Spohn Circle', 'Tehran', '1964-08-30'); 
 INSERT INTO `customers` VALUES(2, 'Riley', 'Ryans', 'Will', '034-942-9372', 'CUSTOMER3456', '+989198368408', '50 Lillian Crossing', 'Tabriz', '1974-03-21');
 
 -- STAFF --
@@ -62,8 +62,7 @@ CREATE TABLE `loans`(
     CONSTRAINT `customer_idx` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
-INSERT INTO `loans` VALUES (1, 2, 28.89,1);
-INSERT INTO `loans` VALUES (2, 1, 437.5,1);
+INSERT INTO `loans` VALUES (1, 1, 28.89,1);
 
 -- ACCOUNT --
 CREATE TABLE `accounts`(
@@ -72,16 +71,13 @@ CREATE TABLE `accounts`(
     `customer_id` INT NOT NULL,
     `account_type` VARCHAR(25) NOT NULL,
     `balance` DECIMAL(12,2) DEFAULT '0',
-    `loan_status` INT,
     PRIMARY KEY (`account_id`),
-    KEY `fk_customer_idx` (`customer_id`),
-    KEY `fk_loan_statusx` (`loan_status`),
-    CONSTRAINT `fk_customer_idx` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT `fk_loan_statusx` FOREIGN KEY (`loan_status`) REFERENCES `loans` (`loan_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+    KEY `fx_customer_idx` (`customer_id`),
+    CONSTRAINT `fx_customer_idx` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
-INSERT INTO `accounts` VALUES (1, '1293427420', 1, 'Checkings', 234.98, 2);
-INSERT INTO `accounts` VALUES (2, '0590439283', 2, 'Savings', 400, 1);
+INSERT INTO `accounts` VALUES (1, '1293427420', 1, 'Checkings', 234.98);
+INSERT INTO `accounts` VALUES (2, '0590439283', 2, 'Savings', 400);
 
 
 -- CARDS --
@@ -94,7 +90,7 @@ CREATE TABLE `cards` (
     `cvv2` INT(3),
     PRIMARY KEY (`cards_id`),
     KEY `fx_customer_idx` (`customer_id`),
-    CONSTRAINT `fx_customer_idx` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+    CONSTRAINT `fk_customer_idx` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 INSERT INTO `cards` VALUES (1, 2, '1293427420498273','2002-09-09', '2022-07-09', 134);
@@ -150,6 +146,5 @@ CREATE TABLE `central bank` (
     PRIMARY KEY (`id`)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
-INSERT INTO `central bank` VALUES (1, 'CentralBank101', 'secure*password');
 
 
