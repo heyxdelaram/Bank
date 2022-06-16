@@ -28,4 +28,3 @@ public class CustomerS {
             customerES=customersR.select (); }
         return customerES; }
 }
-
