@@ -11,26 +11,34 @@ import java.awt.*;
 import java.util.Objects;
 
 public class CustomerC {
-    public void login() throws Exception{
-        //MainMenu mainMenu = new MainMenu();
-        try (CustomerLogin customerLogin = new CustomerLogin()){
+    public void login(String username, String pass) throws Exception{
+        try (CustomerLogin customerLogin = new CustomerLogin(new JFrame(), true)){
+
             CustomerE customerE=new CustomerE();
-            customerE.setNationalCode(customerLogin.getnCode());
-            customerE.setPassword(customerLogin.getPass());
+            customerE.setPassword(pass);
 
             CustomerE customerE1=new CustomerE();
+            customerE1.setNationalCode(username);
+
             CustomerS customerS=new CustomerS();
             customerS.login(customerE1);
-            if (customerE.getPassword() == customerE1.getPassword()){
-                System.out.println(new StandardResponse(StatusResponse.SUCCESS));
-                customerLogin.dispose();
+
+            if (customerE.getPassword().equals(customerE1.getPassword())){
+
                 MainMenu mm = new MainMenu();
                 CustomerMenu customerMenu = new CustomerMenu(mm, true);
                 customerMenu.setVisible(true);
-            }else
-                new StandardResponse(StatusResponse.ERROR);
+
+            }else{
+                StringBuilder warning = new StringBuilder();
+                warning.append("national code or password incorrect.");
+                JOptionPane.showMessageDialog(customerLogin, warning.toString(), "Input Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
     }
+   
     public void transferMoney() throws Exception{
         try (TransferMoneyForm transferMoneyForm=new TransferMoneyForm()){
             CardE cardE=new CardE();
