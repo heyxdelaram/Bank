@@ -29,9 +29,17 @@ public class StaffC {
             else new StandardResponse(StatusResponse.ERROR);
         }
     }
-    public void createAccount() throws Exception{
-        try (CustomerLogin customerLogin=new CustomerLogin()){
-            AccountS.getInstance().save(new AccountE().setId(1));
+      public void createAccount() throws Exception {
+        Random dice = new Random();
+        long number = 0;
+        for (long counter = 1; counter <= 10; counter++) {
+            number = dice.nextLong(10);
+        }
+
+
+        try (CustomerLogin customerLogin = new CustomerLogin()) {
+            AccountS accountS = new AccountS();
+            AccountS.getInstance().save(new AccountE().setId(number));
         } catch (Exception e) {
             e.printStackTrace();
         }
