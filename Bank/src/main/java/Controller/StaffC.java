@@ -10,23 +10,32 @@ import Service.AccountS;
 import Service.StaffS;
 
 public class StaffC {
-    public void login() throws Exception{
-        try (StaffLogin staffLogin=new StaffLogin()){
+public void login(String username, String pass) throws Exception{
+        try (StaffLogin staffLogin=new StaffLogin(new JFrame(), true)){
+
             StaffE staffE=new StaffE();
-            staffE.setUsername(staffLogin.getUsername());
-            staffE.setPassword(staffLogin.getPass());
+            staffE.setPassword(pass);
+            staffE.setUsername(username);
 
             StaffE staffE1=new StaffE();
+            staffE1.setUsername(username);
+
             StaffS staffS=new StaffS();
             staffS.login(staffE1);
-            if (staffE1.getPassword()==staffE.getPassword()){
-                new StandardResponse(StatusResponse.SUCCESS);
-                staffLogin.dispose();
+
+            if (staffE.getPassword().equals(staffE1.getPassword()) && staffE.getUsername().equals(staffE1.getUsername())){
+
                 MainMenu mm = new MainMenu();
                 StaffMenu stm = new StaffMenu(mm, true);
                 stm.setVisible(true);
             }
-            else new StandardResponse(StatusResponse.ERROR);
+            else{
+                StringBuilder warning = new StringBuilder();
+                warning.append("\tusername or password incorrect.");
+                JOptionPane.showMessageDialog(staffLogin, warning.toString(), "Input Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
       public void createAccount() throws Exception {
