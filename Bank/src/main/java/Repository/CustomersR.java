@@ -22,7 +22,7 @@ public class CustomersR implements AutoCloseable{
             System.out.println(resultSet.getString(2));
 
      */
-        }
+    }
 
 
 
@@ -58,99 +58,30 @@ public class CustomersR implements AutoCloseable{
         preparedStatement.setLong(10, customersE.getId());
         preparedStatement.executeUpdate();
     }
-/*
-    public void delete(CustomerE customersE) throws Exception{
-        preparedStatement = connection.prepareStatement("DELETE FROM customers WHERE customer_is = ?");
+    /*
+        public void delete(CustomerE customersE) throws Exception{
+            preparedStatement = connection.prepareStatement("DELETE FROM customers WHERE customer_is = ?");
 
-        preparedStatement.setLong(1, customersE.getId());
-        preparedStatement.executeUpdate();
-    }
-*/
-    public String selectPassword(CustomerE customerE) throws Exception {
-        preparedStatement = connection.prepareStatement("SELECT *FROM customers WHERE national_code = ?");
+            preparedStatement.setLong(1, customersE.getId());
+            preparedStatement.executeUpdate();
+        }
+    */
+    public void selectPassword(CustomerE customerE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT password, national_code FROM customers WHERE national_code = ?");
         try {
             preparedStatement.setString(1, customerE.getNationalCode());
         }catch (Exception exception){
             throw new Exception("System Error");
         }
-        ResultSet resultSet = preparedStatement.executeQuery();
 
+        ResultSet resultSet = preparedStatement.executeQuery();
         String dbpass = null;
         while (resultSet.next()) {
             dbpass = resultSet.getString("password");
-        }
-        //customerE.setPassword(dbpass);
-        return dbpass;
-    }
-   /*
-    public void login(CustomerE customerE) throws Exception {
-        preparedStatement = connection.prepareStatement("SELECT *FROM customers WHERE national_code = ?");
-        preparedStatement.setString(1, customerE.getNationalCode());
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        String dbnCode = null;
-        String dbpass = null;
-        while (resultSet.next()) {
-            dbnCode = resultSet.getString("national_code");
-            dbpass = resultSet.getString("password");
+            customerE.setPassword(dbpass);
         }
     }
-    */
-    /*
-        //System.out.println(dbnCode);
-        //System.out.println(dbpass);
-        if (dbnCode.equals(customerE.getNationalCode())){
-            if (customerE.getPassword().equals(dbpass)){
-                System.out.println("Log in successful.");
-            }else{
-                System.out.println("Log in unsuccessful.");
-            }
-        }else{
-            System.out.println("Log in unsuccessful.");
-        }
 
-    }
-    /*
-    public void login(long id) throws Exception {
-        preparedStatement = connection.prepareStatement("SELECT *FROM customers WHERE customer_id = ?");
-        preparedStatement.setLong(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        String nationalCode = null;
-        String pass = null;
-        while (resultSet.next()) {
-            nationalCode = resultSet.getString("national_code");
-            pass = resultSet.getString("password");
-        }
-
-        preparedStatement = connection.prepareStatement("SELECT *FROM customers WHERE national_code = ?");
-        preparedStatement.setString(1, nationalCode);
-
-        //resultSet = preparedStatement.executeQuery();
-        if (!resultSet.next()) {
-            //no user matched
-            System.out.printf("not matched username");
-        } else {
-            String dbpass = resultSet.getString("password");
-            if (dbpass.equals(pass)) {
-                //succeed Login
-                System.out.printf(" matched");
-
-            } else {
-                //incorrect password for user
-                System.out.printf("not matched pass");
-
-            }
-        }
-
-        //CustomerE customerE = new CustomerE();
-        //ResultSet resultSet = preparedStatement.executeQuery();
-        //while (resultSet.next()){
-        //    customerE.setNationalCode(resultSet.getString("national_code"));
-        //    customerE.setPassword(resultSet.getString("password"));
-        //}
-        //return customerE;
-    }
-*/
 
     public List<CustomerE> select() throws Exception{
         preparedStatement = connection.prepareStatement("SELECT *FROM customers;");
@@ -171,7 +102,7 @@ public class CustomersR implements AutoCloseable{
         }
         return customerEList;
     }
-    
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {

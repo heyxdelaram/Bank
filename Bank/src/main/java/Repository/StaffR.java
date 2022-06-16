@@ -3,6 +3,7 @@ package Repository;
 import Entity.CustomerE;
 import Entity.StaffE;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -65,35 +66,41 @@ public class StaffR implements AutoCloseable{
         preparedStatement.executeUpdate();
     }
 
-/*
-    public String selectUsername(StaffE staffE) throws Exception {
-        preparedStatement = connection.prepareStatement("SELECT *FROM staff WHERE username = ?");
-        String dbusername = null;
-        try {
-            preparedStatement.setString(1, staffE.getUsername());
-            ResultSet resultSet = preparedStatement.executeQuery();
+    public void selectUsername(StaffE staffE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT username FROM staff WHERE username = ?");
 
+        try {
+            try {
+                preparedStatement.setString(1, staffE.getUsername());
+            }catch (Exception e){
+                throw new Exception("System Error");
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String dbusername = null;
             while (resultSet.next()) {
                 dbusername = resultSet.getString("username");
+                staffE.setUsername(dbusername);
             }
         }catch (Exception exception){
-            throw new BankException("System Error");
+            staffE.setUsername(null);
         }
-
-        return dbusername;
     }
-*/
-    public String selectPassword(StaffE staffE) throws Exception {
-        preparedStatement = connection.prepareStatement("SELECT *FROM staff WHERE username = ?");
-        preparedStatement.setString(1, staffE.getUsername());
+
+    public void selectPassword(StaffE staffE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT password, username FROM staff WHERE username = ?");
+        try {
+            preparedStatement.setString(1, staffE.getUsername());
+        }catch (Exception exception){
+            throw new Exception("System Error");
+        }
 
         ResultSet resultSet = preparedStatement.executeQuery();
         String dbpass = null;
-
         while (resultSet.next()) {
-            dbpass = resultSet.getString("username");
+            dbpass = resultSet.getString("password");
+            staffE.setPassword(dbpass);
         }
-        return dbpass;
     }
 
     public List<StaffE> select() throws Exception{
@@ -118,7 +125,7 @@ public class StaffR implements AutoCloseable{
         }
         return staffEList;
     }
-    
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {
@@ -148,5 +155,4 @@ public class StaffR implements AutoCloseable{
 
 
 }
-
 

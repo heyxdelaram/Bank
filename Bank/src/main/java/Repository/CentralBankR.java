@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
-public class CentralBankR {
+public class CentralBankR implements AutoCloseable{
     private Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -42,24 +42,24 @@ public class CentralBankR {
                 transactionR.select();
         }
     }
-/*
-    public String selectUsername(CentralBankE centralBankE) throws Exception {
-        String dbusername = null;
-        preparedStatement = connection.prepareStatement("SELECT *FROM `central bank` WHERE username = ?");
-        try {
-            preparedStatement.setString(1, centralBankE.getUsername());
-            ResultSet resultSet = preparedStatement.executeQuery();
+    /*
+        public String selectUsername(CentralBankE centralBankE) throws Exception {
+            String dbusername = null;
+            preparedStatement = connection.prepareStatement("SELECT *FROM `central bank` WHERE username = ?");
+            try {
+                preparedStatement.setString(1, centralBankE.getUsername());
+                ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                dbusername = resultSet.getString("username");
+                while (resultSet.next()) {
+                    dbusername = resultSet.getString("username");
+                }
+            }catch (Exception exception){
+                throw new BankException("System Error");
             }
-        }catch (Exception exception){
-            throw new BankException("System Error");
-        }
 
-        return dbusername;
-    }
-*/
+            return dbusername;
+        }
+    */
     public String selectPassword(CustomerE customerE) throws Exception {
         preparedStatement = connection.prepareStatement("SELECT *FROM `central bank` WHERE username = ?");
         preparedStatement.setString(1, customerE.getNationalCode());
@@ -72,7 +72,7 @@ public class CentralBankR {
         //customerE.setPassword(dbpass);
         return dbpass;
     }
-    
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {
