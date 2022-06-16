@@ -1,13 +1,11 @@
 package GUI;
 
+import Controller.CentralBankC;
 import Controller.CustomerC;
 import Entity.CustomerE;
 
 import javax.swing.*;
 public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable {
-    public String nCode1;
-    public String pass1;
-
     public CustomerLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -61,17 +59,34 @@ public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable 
         pack();
     }
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        String nCode = nCodeText.getText();
-        String pass = passText.getText();
+    public void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-        this.nCode1 = nCode;
-        this.pass1 = pass;
-        CustomerC customerC = new CustomerC();
-        try {
-            customerC.login();
-        } catch (Exception e) {
-            e.printStackTrace();
+        String nCode = null;
+        String pass = null;
+        StringBuilder warning = new StringBuilder();
+
+        if (nCodeText.getText().isEmpty()){
+            warning.append("\tnational code is empty\n");
+        }else{
+            nCode = nCodeText.getText();
+        }
+
+        if (passText.getText().isEmpty()){
+            warning.append("\tpassword is empty\n");
+        }else{
+            pass = passText.getText();
+        }
+
+        if (warning.length() > 0)
+            JOptionPane.showMessageDialog(this, warning.toString(), "Input Error", JOptionPane.WARNING_MESSAGE);
+        else{
+            CustomerC customerC = new CustomerC();
+            this.dispose();
+            try {
+                customerC.login(nCode, pass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -102,14 +117,6 @@ public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable 
     private javax.swing.JTextField nCodeText;
     private javax.swing.JLabel passLabel;
     private javax.swing.JPasswordField passText;
-
-    public String getnCode() {
-        return nCode1;
-    }
-
-    public String getPass() {
-        return pass1;
-    }
 
     @Override
     public void close() throws Exception {

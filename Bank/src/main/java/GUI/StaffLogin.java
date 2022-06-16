@@ -7,9 +7,6 @@ import Controller.StaffC;
 import javax.swing.*;
 
 public class StaffLogin extends javax.swing.JDialog implements AutoCloseable{
-    static String username1;
-    static String pass1;
-
     public StaffLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -65,16 +62,33 @@ public class StaffLogin extends javax.swing.JDialog implements AutoCloseable{
     }
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        String nCode = usernameText.getText();
-        String pass = passText.getText();
 
-        this.username1 = nCode;
-        this.pass1 = pass;
-        StaffC staffC = new StaffC();
-        try {
-            staffC.login();
-        } catch (Exception e) {
-            e.printStackTrace();
+        String username = null;
+        String pass = null;
+        StringBuilder warning = new StringBuilder();
+
+        if (usernameText.getText().isEmpty()){
+            warning.append("\tusername is empty\n");
+        }else{
+            username = usernameText.getText();
+        }
+
+        if (passText.getText().isEmpty()){
+            warning.append("\tpassword is empty\n");
+        }else{
+            pass = passText.getText();
+        }
+
+        if (warning.length() > 0)
+            JOptionPane.showMessageDialog(this, warning.toString(), "Input Error", JOptionPane.WARNING_MESSAGE);
+        else{
+            StaffC staffC = new StaffC();
+            this.dispose();
+            try {
+                staffC.login(username, pass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -103,14 +117,6 @@ public class StaffLogin extends javax.swing.JDialog implements AutoCloseable{
     private javax.swing.JPasswordField passText;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameText;
-
-    public String  getPass() {
-        return pass1;
-    }
-
-    public String getUsername() {
-        return username1;
-    }
 
     @Override
     public void close() throws Exception {

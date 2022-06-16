@@ -3,12 +3,9 @@ package GUI;
 import Controller.CentralBankC;
 import Controller.StaffC;
 
-import static GUI.StaffLogin.username1;
+import javax.swing.*;
 
 public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseable{
-
-    private String username1;
-    private String pass1;
 
     public CentralBankLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,10 +31,12 @@ public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseab
         setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(3, 2, 10, 5));
 
+        usernameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         usernameLabel.setText("Username:");
         getContentPane().add(usernameLabel);
         getContentPane().add(usernameText);
 
+        passLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         passLabel.setText("Password:");
         getContentPane().add(passLabel);
         getContentPane().add(passText);
@@ -51,6 +50,11 @@ public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseab
         getContentPane().add(loginButton);
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(cancelButton);
 
         pack();
@@ -58,17 +62,36 @@ public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseab
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-        String nCode = usernameText.getText();
-        String pass = passText.getText();
+        String username = null;
+        String pass = null;
+        StringBuilder warning = new StringBuilder();
 
-        this.username1 = nCode;
-        this.pass1 = pass;
-        CentralBankC centralBankC = new CentralBankC();
-        try {
-            centralBankC.login();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (usernameText.getText().isEmpty()){
+            warning.append("\tusername is empty\n");
+        }else{
+            username = usernameText.getText();
+            //setUsername(usernameText.getText());
         }
+
+        if (passText.getText().isEmpty()){
+            warning.append("\tpassword is empty\n");
+        }else{
+            pass = passText.getText();
+            //setPass(passText.getText());
+        }
+
+        if (warning.length() > 0)
+            JOptionPane.showMessageDialog(this, warning.toString(), "Input Error", JOptionPane.WARNING_MESSAGE);
+        else{
+            CentralBankC centralBankC = new CentralBankC();
+            this.dispose();
+            try {
+                centralBankC.login(username, pass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,15 +137,6 @@ public class CentralBankLogin extends javax.swing.JDialog implements AutoCloseab
     private javax.swing.JPasswordField passText;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameText;
-
-    public String getPass() {
-        return pass1;
-    }
-
-
-    public String getUsername() {
-        return username1;
-    }
 
     @Override
     public void close() throws Exception {
