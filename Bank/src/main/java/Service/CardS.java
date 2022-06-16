@@ -6,7 +6,7 @@ import Repository.CardR;
 import java.util.List;
 
 public class CardS {
-    private CardS(){}
+    public CardS(){}
     private static CardS cardS=new CardS();
     public static CardS getInstance(){
         return cardS;
@@ -29,5 +29,10 @@ public class CardS {
             cardES=cardR.select();
         }
         return cardES;
+    }
+    public void getCard(CardE cardE) throws Exception{
+        try (CardR cardR=new CardR()){
+
+        }
     }
 }
