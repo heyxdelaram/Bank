@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckR implements AutoCloseable{
+public class CheckR implements AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -89,3 +89,4 @@ public class CheckR implements AutoCloseable{
         connection.close();
     }
 }
+

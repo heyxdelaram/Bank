@@ -3,10 +3,11 @@ package Service;
 import Entity.AccountE;
 import Repository.AccountR;
 
+import java.awt.*;
 import java.util.List;
 
 public class AccountS {
-    private AccountS() {}
+    public AccountS() {}
     private static AccountS accountS=new AccountS();
     public static AccountS getInstance(){
         return accountS;
@@ -30,10 +31,16 @@ public class AccountS {
         }
         return accountES;
     }
-    public void numbermethod() throws Exception {
-        try (AccountR accountR = new AccountR()) {
-            accountR.selectRowNum();
-        } catch (Exception e) {
+
+    public void getBalance(AccountE accountE) throws Exception{
+        try (AccountR accountR = new AccountR()){
+            accountR.selectBalance(accountE);
+        }
+    }
+
+    public void pay(AccountE accountE) throws Exception{
+        try (AccountR accountR = new AccountR()){
+            accountR.selectBalance(accountE);
         }
     }
 }

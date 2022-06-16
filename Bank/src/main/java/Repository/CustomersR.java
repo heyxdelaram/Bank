@@ -103,6 +103,22 @@ public class CustomersR implements AutoCloseable{
         return customerEList;
     }
 
+    public void selectID(CustomerE customerE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT customer_id, national_code FROM customers WHERE national_code = ?");
+        try {
+            preparedStatement.setString(1, customerE.getNationalCode());
+        }catch (Exception exception){
+            throw new Exception("System Error");
+        }
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        Long dbid = null;
+        while (resultSet.next()) {
+            dbid = resultSet.getLong("customer_id");
+            customerE.setId(dbid);
+        }
+    }
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {

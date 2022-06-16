@@ -26,10 +26,10 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         welcomeLabel.setBackground(new java.awt.Color(255, 255, 255));
-        welcomeLabel.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        welcomeLabel.setFont(new java.awt.Font("Stencil", 0, 48)); // NOI18N
         welcomeLabel.setText("Welcome");
         jPanel1.add(welcomeLabel);
-        welcomeLabel.setBounds(220, 50, 200, 80);
+        welcomeLabel.setBounds(220, 60, 320, 80);
 
         welcome2Label.setFont(new java.awt.Font("Roona Sans Light PERSONAL", 0, 8)); // NOI18N
         welcome2Label.setText("Please select your role");
@@ -63,7 +63,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.add(centralbankButton);
         centralbankButton.setBounds(230, 330, 190, 70);
 
-        backgroundImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\asus\\IdeaProjects\\Bank\\src\\rm222-mind-22_1_2.jpg")); // NOI18N
+        backgroundImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\asus\\IdeaProjects\\Bank\\src\\GUI\\background.jpg")); // NOI18N
         jPanel1.add(backgroundImage);
         backgroundImage.setBounds(0, 0, 700, 510);
 
@@ -87,12 +87,12 @@ public class MainMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
         );
 
         pack();

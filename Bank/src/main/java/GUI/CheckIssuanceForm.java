@@ -1,5 +1,7 @@
 package GUI;
 
+import javax.swing.*;
+
 public class CheckIssuanceForm extends javax.swing.JDialog {
 
     public CheckIssuanceForm(java.awt.Frame parent, boolean modal) {
@@ -22,6 +24,7 @@ public class CheckIssuanceForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Check Issuance Form");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(5, 2, 2, 2));
 
         firstNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -65,6 +68,11 @@ public class CheckIssuanceForm extends javax.swing.JDialog {
         getContentPane().add(writeCheckButton);
 
         submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(submitButton);
 
         pack();
@@ -83,6 +91,12 @@ public class CheckIssuanceForm extends javax.swing.JDialog {
         MainMenu mm = new MainMenu();
         WriteCheckForm writeCheck = new WriteCheckForm(mm, true);
         writeCheck.setVisible(true);
+    }
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        this.dispose();
+        StringBuilder success = new StringBuilder();
+        JOptionPane.showMessageDialog(this, "Check successfully written", "successful", JOptionPane.PLAIN_MESSAGE);
     }
 
     public static void main(String args[]) {

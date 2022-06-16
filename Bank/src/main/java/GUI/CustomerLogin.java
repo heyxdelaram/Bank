@@ -6,6 +6,7 @@ import Entity.CustomerE;
 
 import javax.swing.*;
 public class CustomerLogin extends javax.swing.JDialog implements AutoCloseable {
+
     public CustomerLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

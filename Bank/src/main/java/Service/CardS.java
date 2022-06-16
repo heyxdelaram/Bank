@@ -3,6 +3,7 @@ package Service;
 import Entity.CardE;
 import Repository.CardR;
 
+import java.awt.*;
 import java.util.List;
 
 public class CardS {
@@ -32,7 +33,8 @@ public class CardS {
     }
     public void getCard(CardE cardE) throws Exception{
         try (CardR cardR=new CardR()){
-
+            cardR.selectCvv2(cardE);
+            cardR.selectExpiryDate(cardE);
         }
     }
 }

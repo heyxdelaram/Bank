@@ -1,17 +1,13 @@
 package Controller;
 
-import Entity.AccountE;
 import Entity.CentralBankE;
 import GUI.CentralBankLogin;
 import GUI.MainMenu;
 import Service.*;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
-import javax.swing.text.Document;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class CentralBankC {
     public void login(String username, String pass) throws Exception{
@@ -28,6 +24,8 @@ public class CentralBankC {
                 StringBuilder success = new StringBuilder();
                 success.append("\tLogin successful.");
                 JOptionPane.showMessageDialog(centralBankLogin, success.toString(), "", JOptionPane.PLAIN_MESSAGE);
+                CentralBankC centralBankC = new CentralBankC();
+                //JOptionPane.showMessageDialog(centralBankLogin, centralBankC.showAllData(), "", JOptionPane.PLAIN_MESSAGE);
             }
             else{
                 StringBuilder warning = new StringBuilder();
@@ -36,22 +34,23 @@ public class CentralBankC {
             }
         }
     }
-    public List showAllData() throws Exception{
-       List<List> list=new ArrayList<>();
+
+    public List showAllData(List list) throws Exception{
+        //List<List> list=new ArrayList<>();
         AccountS accountS=new AccountS();
-        list.add(accountS.report());
+        list.add(String.valueOf(accountS.report()));
         CardS cardS=new CardS();
-        list.add(cardS.report());
+        list.add(String.valueOf(cardS.report()));
         CheckS checkS=new CheckS();
-        list.add(cardS.report());
+        list.add(String.valueOf(cardS.report()));
         CustomerS customerS=new CustomerS();
-        list.add(customerS.report());
+        list.add(String.valueOf(customerS.report()));
         LoanS loanS=new LoanS();
-        list.add(loanS.report());
+        list.add(String.valueOf(loanS.report()));
         StaffS staffS=new StaffS();
-        list.add(staffS.report());
+        list.add(String.valueOf(staffS.report()));
         TransactionS transactionS=new TransactionS();
-        list.add(transactionS.report());
-    return list;
+        list.add(String.valueOf(transactionS.report()));
+        return list;
     }
 }

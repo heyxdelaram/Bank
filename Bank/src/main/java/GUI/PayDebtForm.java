@@ -1,6 +1,10 @@
 package GUI;
 
-public class PayDebtForm extends javax.swing.JDialog {
+import Controller.CustomerC;
+
+import javax.swing.*;
+
+public class PayDebtForm extends javax.swing.JDialog implements AutoCloseable{
 
     public PayDebtForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -24,6 +28,7 @@ public class PayDebtForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pay Debt");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(5, 2, 2, 2));
 
         payeeNumLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -49,6 +54,11 @@ public class PayDebtForm extends javax.swing.JDialog {
         getContentPane().add(amountText);
 
         payButton.setText("Pay");
+        payButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(payButton);
 
         cancelButton.setText("Cancel");
@@ -81,6 +91,26 @@ public class PayDebtForm extends javax.swing.JDialog {
         });
     }
 
+
+    private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String payeeNum = payeeNumText.getText();
+        String type = DebtTypeText.getActionCommand();
+        double amount = Double.parseDouble(amountText.getText());
+        StringBuilder warning = new StringBuilder();
+
+        if (payeeNumText.getText().isEmpty() || ReceiverNumText.getText().isEmpty() || amountText.getText().isEmpty()){
+            warning.append("all fields must be filled");
+            JOptionPane.showMessageDialog(this, warning.toString(), "Input Error", JOptionPane.WARNING_MESSAGE);
+        }else{
+            CustomerC customerC = new CustomerC();
+            try {
+                customerC.payDebt(payeeNum, type, amount);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
     private javax.swing.JComboBox<String> DebtTypeText;
     private javax.swing.JLabel ReceiverNumLabel;
     private javax.swing.JTextField ReceiverNumText;
@@ -91,4 +121,9 @@ public class PayDebtForm extends javax.swing.JDialog {
     private javax.swing.JButton payButton;
     private javax.swing.JLabel payeeNumLabel;
     private javax.swing.JTextField payeeNumText;
+
+    @Override
+    public void close() throws Exception {
+
+    }
 }

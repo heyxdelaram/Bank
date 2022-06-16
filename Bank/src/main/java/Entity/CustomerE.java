@@ -66,18 +66,16 @@ public class CustomerE {
         return nationalCode;
     }
 
-    public CustomerE setNationalCode(String nationalCode) {
+    public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
-        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public CustomerE setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this;
     }
 
     public String getCellPhone() {

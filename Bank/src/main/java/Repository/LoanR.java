@@ -70,7 +70,7 @@ public class LoanR implements AutoCloseable{
         }
         return loanEList;
     }
-    
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {

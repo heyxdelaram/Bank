@@ -3,6 +3,7 @@ package Service;
 import Entity.CustomerE;
 import Repository.CustomersR;
 
+import java.awt.*;
 import java.util.List;
 
 public class CustomerS {
@@ -25,6 +26,13 @@ public class CustomerS {
     public List<CustomerE> report() throws Exception{
         List<CustomerE> customerES;
         try (CustomersR customersR=new CustomersR ()){
-            customerES=customersR.select (); }
-        return customerES; }
+            customerES=customersR.select(); }
+        return customerES;
+    }
+
+    public void customerId(CustomerE customerE) throws Exception{
+        try (CustomersR customersR=new CustomersR()){
+            customersR.selectID(customerE);
+        }
+    }
 }

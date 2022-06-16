@@ -2,6 +2,7 @@ package Repository;
 
 import Entity.CardE;
 import Entity.CustomerE;
+import Entity.StaffE;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -64,7 +65,40 @@ public class CardR implements AutoCloseable {
         }
         return cardEList;
     }
-    
+
+    public void selectCvv2(CardE cardE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT cvv2, card_number FROM cards WHERE card_number = ?");
+        try {
+            preparedStatement.setString(1, cardE.getCardNumber());
+        }catch (Exception exception){
+            throw new Exception("System Error");
+        }
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        int dbcvv2 = 0;
+        while (resultSet.next()) {
+            dbcvv2 = resultSet.getInt("cvv2");
+            cardE.setCvv2(dbcvv2);
+        }
+    }
+
+
+    public void selectExpiryDate(CardE cardE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT expiry_date, card_number FROM cards WHERE card_number = ?");
+        try {
+            preparedStatement.setString(1, cardE.getCardNumber());
+        }catch (Exception exception){
+            throw new Exception("System Error");
+        }
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        String dbexpdate = null;
+        while (resultSet.next()) {
+            dbexpdate = resultSet.getString("expiry_date");
+            cardE.setExpirationDate(dbexpdate);
+        }
+    }
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {

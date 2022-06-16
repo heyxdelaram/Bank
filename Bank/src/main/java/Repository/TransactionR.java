@@ -59,7 +59,7 @@ public class TransactionR implements AutoCloseable {
         preparedStatement.setLong(1, id);
         preparedStatement.executeUpdate();
     }
-    
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {

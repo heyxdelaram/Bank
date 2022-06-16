@@ -66,7 +66,24 @@ public class AccountR implements AutoCloseable {
         }
         return accountEList;
     }
-    
+
+
+    public void selectBalance(AccountE accountE) throws Exception {
+        preparedStatement = connection.prepareStatement("SELECT balance, customer_id FROM accounts WHERE customer_id = ?");
+        try {
+            preparedStatement.setLong(1, accountE.getCustomerId());
+        }catch (Exception exception){
+            throw new Exception("System Error");
+        }
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        double dbBalance;
+        while (resultSet.next()) {
+            dbBalance = resultSet.getLong("balance");
+            accountE.setBalance(dbBalance);
+        }
+    }
+
     public int selectRowNum() throws Exception {
         int count = 0;
         try {
@@ -94,4 +111,3 @@ public class AccountR implements AutoCloseable {
         connection.close();
     }
 }
-

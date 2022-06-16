@@ -1,6 +1,12 @@
 package GUI;
 
-public class CreateAccountForm extends javax.swing.JDialog {
+import Controller.CentralBankC;
+import Controller.CustomerC;
+import Controller.StaffC;
+
+import javax.swing.*;
+
+public class CreateAccountForm extends javax.swing.JDialog implements AutoCloseable{
 
     public CreateAccountForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -17,6 +23,8 @@ public class CreateAccountForm extends javax.swing.JDialog {
         lastNameText = new javax.swing.JTextField();
         fNameLabel = new javax.swing.JLabel();
         fNameText = new javax.swing.JTextField();
+        passLabel = new javax.swing.JLabel();
+        passText = new javax.swing.JTextField();
         nCodeLabel = new javax.swing.JLabel();
         nCodeText = new javax.swing.JTextField();
         cellLabel = new javax.swing.JLabel();
@@ -36,7 +44,8 @@ public class CreateAccountForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Account");
-        getContentPane().setLayout(new java.awt.GridLayout(11, 2, 2, 2));
+        setMinimumSize(new java.awt.Dimension(400, 300));
+        getContentPane().setLayout(new java.awt.GridLayout(12, 2, 2, 2));
 
         firstNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         firstNameLabel.setText("First Name:");
@@ -59,6 +68,11 @@ public class CreateAccountForm extends javax.swing.JDialog {
         fNameLabel.setText("Father's Name:");
         getContentPane().add(fNameLabel);
         getContentPane().add(fNameText);
+
+        passLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        passLabel.setText("Password: ");
+        getContentPane().add(passLabel);
+        getContentPane().add(passText);
 
         nCodeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nCodeLabel.setText("National Code:");
@@ -148,13 +162,113 @@ public class CreateAccountForm extends javax.swing.JDialog {
     private void addressTextActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String firstName = null;
+        String lastName = null;
+        String fName = fNameText.getName();
+        String nCode = null;
+        String cellNum = cellText.getText();
+        String address = addressText.getText();
+        String city = cityText.getText();
+        String birthday = birthdayText.getText();
+        String pass = passText.getText();
+        double amount = 0;
+        String accType;
 
-    private void cardIssuanceButtonActionPerformed(java.awt.event.ActionEvent evt) {
-           
+        StringBuilder warning = new StringBuilder();
+
+        if (firstNameText.getText().isEmpty()){
+            warning.append("\tfist name must be entered\n");
+        }else{
+            firstName = firstNameText.getText();
+        }
+
+        if (lastNameText.getText().isEmpty()){
+            warning.append("last name must be entered\n");
+        }else{
+            lastName = lastNameText.getText();
+        }
+        if (nCodeText.getText().isEmpty()){
+            warning.append("national code must be entered\n");
+        }else {
+            nCode = nCodeText.getText();
+        }
+        if (balanceText.getText().isEmpty()){
+            warning.append("amount must be entered\n");
+        }else {
+            amount = Double.parseDouble(balanceText.getText());
+        }
+
+        if (warning.length() > 0)
+            JOptionPane.showMessageDialog(this, warning.toString(), "Input Error", JOptionPane.WARNING_MESSAGE);
+        else{
+            CustomerC customerC = new CustomerC();
+            this.dispose();
+            try {
+                customerC.createAccount(firstName, lastName, fName, nCode, pass, cellNum, address, city, birthday);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
+    private void cardIssuanceButtonActionPerformed(java.awt.event.ActionEvent evt) {
+
+        String firstName = null;
+        String lastName = null;
+        String fName = fNameText.getName();
+        String nCode = nCodeText.getText();
+        String cellNum = cellText.getText();
+        String address = addressText.getText();
+        String city = cityText.getText();
+        String birthday = birthdayText.getText();
+        String pass = passText.getText();
+        double amount = 0;
+        String accType;
+
+        StringBuilder warning = new StringBuilder();
+
+        if (firstNameText.getText().isEmpty()){
+            warning.append("\tfist name must be entered\n");
+        }else{
+            firstName = firstNameText.getText();
+        }
+
+        if (lastNameText.getText().isEmpty()){
+            warning.append("last name must be entered\n");
+        }else{
+            lastName = lastNameText.getText();
+        }
+        if (nCodeText.getText().isEmpty()){
+            warning.append("national code must be entered\n");
+        }else {
+            nCode = nCodeText.getText();
+        }
+        if (balanceText.getText().isEmpty()){
+            warning.append("amount must be entered\n");
+        }else {
+            amount = Double.parseDouble(balanceText.getText());
+        }
+
+        if (warning.length() > 0)
+            JOptionPane.showMessageDialog(this, warning.toString(), "Input Error", JOptionPane.WARNING_MESSAGE);
+        else {
+            JOptionPane.showMessageDialog(this, "card issued successfully", "Successful", JOptionPane.PLAIN_MESSAGE);
+        }
+/*
+        else{
+
+            StaffC staffC = new StaffC();
+            this.dispose();
+            try {
+                staffC.createAccount();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+ */
     }
 
     public static void main(String args[]) {
@@ -179,6 +293,8 @@ public class CreateAccountForm extends javax.swing.JDialog {
     private javax.swing.JLabel birthdayLabel;
     private javax.swing.JTextField birthdayText;
     private javax.swing.JButton cardIssuanceButton;
+    private javax.swing.JLabel passLabel;
+    private javax.swing.JTextField passText;
     private javax.swing.JLabel cellLabel;
     private javax.swing.JTextField cellText;
     private javax.swing.JLabel cityLabel;
@@ -194,4 +310,9 @@ public class CreateAccountForm extends javax.swing.JDialog {
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel typeLabel;
     private javax.swing.JComboBox<String> typeText;
+
+    @Override
+    public void close() throws Exception {
+
+    }
 }

@@ -1,7 +1,9 @@
 
 package GUI;
 
-public class TransferMoneyForm extends javax.swing.JDialog {
+import Controller.CustomerC;
+
+public class TransferMoneyForm extends javax.swing.JDialog implements AutoCloseable{
 
     public TransferMoneyForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -26,6 +28,7 @@ public class TransferMoneyForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Transfer Money");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(6, 2, 2, 2));
 
         payeeNumLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -68,6 +71,11 @@ public class TransferMoneyForm extends javax.swing.JDialog {
         getContentPane().add(expiryDateText);
 
         transferButton.setText("Transfer");
+        transferButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(transferButton);
 
         cancelButton.setText("Cancel");
@@ -81,6 +89,20 @@ public class TransferMoneyForm extends javax.swing.JDialog {
         pack();
     }
 
+    private void transferButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        CustomerC customerC = new CustomerC();
+        String payeeNum = payeeNumText.getText();
+        String expDate = expiryDateText.getText();
+        int cvv2 = Integer.parseInt(cvv2Text.getText());
+
+        try {
+            customerC.transferMoney(payeeNum, expDate, cvv2);
+            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     private void ReceiverNumTextActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -120,4 +142,9 @@ public class TransferMoneyForm extends javax.swing.JDialog {
     private javax.swing.JLabel payeeNumLabel;
     private javax.swing.JTextField payeeNumText;
     private javax.swing.JButton transferButton;
+
+    @Override
+    public void close() throws Exception {
+
+    }
 }

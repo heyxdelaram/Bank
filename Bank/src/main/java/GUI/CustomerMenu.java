@@ -1,5 +1,7 @@
 package GUI;
 
+import Controller.CustomerC;
+
 public class CustomerMenu extends javax.swing.JDialog {
 
     public CustomerMenu(java.awt.Frame parent, boolean modal) {
@@ -17,6 +19,7 @@ public class CustomerMenu extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Customer Menu");
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new java.awt.GridLayout(3, 1, 5, 5));
 
         transferMoneyButton.setText("Transfer Money");
@@ -27,7 +30,7 @@ public class CustomerMenu extends javax.swing.JDialog {
         });
         getContentPane().add(transferMoneyButton);
 
-        showBalanceButton.setText("Show Account Status");
+        showBalanceButton.setText("Account Balance");
         showBalanceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showBalanceButtonActionPerformed(evt);
@@ -61,10 +64,15 @@ public class CustomerMenu extends javax.swing.JDialog {
     }
 
     private void showBalanceButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        this.dispose();
-        MainMenu mm = new MainMenu();
-        AccountStatusTable ast = new AccountStatusTable(mm, true);
-        ast.setVisible(true);
+        CustomerLogin customerLogin = new CustomerLogin();
+        //String nCode = customerLogin.getnCode();
+
+        CustomerC customerC = new CustomerC();
+        try {
+            customerC.showBalance("044-647-3290");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String args[]) {
